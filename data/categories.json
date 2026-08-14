@@ -1,0 +1,16 @@
+[
+  { "id": "daily",   "label": "ชีวิตประจำวัน", "icon": "☀️" },
+  { "id": "food",    "label": "อาหาร & เครื่องดื่ม", "icon": "🍚" },
+  { "id": "travel",  "label": "การเดินทาง", "icon": "🚃" },
+  { "id": "work",    "label": "การทำงาน", "icon": "💼" },
+  { "id": "school",  "label": "โรงเรียน & การเรียน", "icon": "🏫" },
+  { "id": "nature",  "label": "ธรรมชาติ", "icon": "🌿" },
+  { "id": "emotion", "label": "อารมณ์ & ความรู้สึก", "icon": "💭" },
+  { "id": "culture", "label": "วัฒนธรรมญี่ปุ่น", "icon": "⛩️" },
+  { "id": "body",    "label": "ร่างกาย & สุขภาพ", "icon": "🩺" },
+  { "id": "time",    "label": "เวลา & ปฏิทิน", "icon": "🕐" },
+  { "id": "shopping","label": "ช้อปปิ้ง", "icon": "🛍️" },
+  { "id": "tech",    "label": "เทคโนโลยี", "icon": "💻" },
+  { "id": "family",  "label": "ครอบครัว & คน", "icon": "👨‍👩‍👧" },
+  { "id": "season",  "label": "ฤดูกาล & เทศกาล", "icon": "🎋" }
+]

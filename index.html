@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>ことば — เรียนคำศัพท์ญี่ปุ่นด้วย SRS</title>
+<meta name="description" content="แอปเรียนคำศัพท์ภาษาญี่ปุ่นด้วยระบบ Spaced Repetition พร้อมเสียงอ่าน สถิติ และคลังคำศัพท์แยกหมวดหมู่ ใช้งานออฟไลน์ได้">
+<meta name="theme-color" content="#faf9f6">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="icons/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ことば">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark">ことば</span>
+      <span class="sub">SRS · คำศัพท์ญี่ปุ่น</span>
+    </div>
+    <button class="icon-btn" id="openFilter" aria-label="ตัวกรอง">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M7 12h10M10 18h4"></path>
+      </svg>
+    </button>
+  </header>
+
+  <!-- ===================== VIEW: เรียน (การ์ด SRS) ===================== -->
+  <main class="view active" id="view-learn">
+    <div class="stage">
+      <div class="card-scene">
+        <div class="card-swipe-wrap" id="cardSwipeWrap">
+          <div class="card" id="card">
+
+            <div class="card-face card-front">
+              <span class="level-pill levelPillText">N5 · ง่ายมาก</span>
+              <div class="corner-btn corner-left favBtn" aria-label="รายการโปรด">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1L7.8 13.8 3 9.5l6.4-.6L12 3z"/></svg>
+              </div>
+              <div class="corner-btn corner-right markBtn" aria-label="บันทึกไว้อ่านใหม่">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+              </div>
+
+              <button class="audio-btn audioBtn" aria-label="ฟังเสียงอ่าน">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 8a5 5 0 0 1 0 8M19.5 5.5a9 9 0 0 1 0 13"/></svg>
+              </button>
+
+              <div class="word-wrap" id="wordWrapFront"></div>
+              <div class="romaji" id="romajiFront"></div>
+
+              <button class="flip-hint" id="flipHintBtn">แตะเพื่อดูคำแปล</button>
+              <div class="stamp stampText">N5</div>
+            </div>
+
+            <div class="card-face card-back">
+              <span class="level-pill levelPillText">N5 · ง่ายมาก</span>
+              <div class="corner-btn corner-left favBtn" aria-label="รายการโปรด">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1L7.8 13.8 3 9.5l6.4-.6L12 3z"/></svg>
+              </div>
+              <div class="corner-btn corner-right markBtn" aria-label="บันทึกไว้อ่านใหม่">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+              </div>
+
+              <div class="meaning-big" id="meaningBack"></div>
+              <div class="category-tag" id="categoryBack"></div>
+
+              <div class="example-block">
+                <div class="example-row">
+                  <p class="example-jp" id="exampleJpBack"></p>
+                  <button class="audio-btn small audioBtn" id="audioBtnExample" aria-label="ฟังเสียงตัวอย่างประโยค">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 8a5 5 0 0 1 0 8"/></svg>
+                  </button>
+                </div>
+                <p class="example-th" id="exampleThBack"></p>
+              </div>
+
+              <div class="rate-row">
+                <button class="rate-btn rate-again" data-rating="0">ไม่รู้<span>Again</span></button>
+                <button class="rate-btn rate-hard" data-rating="1">ยาก<span>Hard</span></button>
+                <button class="rate-btn rate-good" data-rating="2">จำได้<span>Good</span></button>
+                <button class="rate-btn rate-easy" data-rating="3">ง่าย<span>Easy</span></button>
+              </div>
+
+              <div class="stamp stampText">N5</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <p class="hint">แตะการ์ดเพื่อดูคำแปล · ปัดซ้ายไปคำถัดไป · ปัดขวาย้อนกลับ</p>
+    </div>
+  </main>
+
+  <!-- ===================== VIEW: บันทึก (โปรด / อ่านใหม่) ===================== -->
+  <main class="view" id="view-saved">
+    <div class="section-header">
+      <h1>บันทึกของฉัน</h1>
+      <div class="pills saved-tabs">
+        <button class="pill saved-tab active" data-saved-tab="fav">★ รายการโปรด</button>
+        <button class="pill saved-tab" data-saved-tab="mark">🔖 อ่านใหม่</button>
+      </div>
+    </div>
+    <div class="list-wrap" id="savedList"></div>
+  </main>
+
+  <!-- ===================== VIEW: สถิติ ===================== -->
+  <main class="view" id="view-stats">
+    <div class="section-header"><h1>สถิติการเรียน</h1></div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-label">สัปดาห์นี้</span>
+        <span class="stat-num" id="statWeek">0</span>
+        <span class="stat-sub" id="statWeekTotal">0 ครั้ง</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">เดือนนี้</span>
+        <span class="stat-num" id="statMonth">0</span>
+        <span class="stat-sub" id="statMonthTotal">0 ครั้ง</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">ปีนี้</span>
+        <span class="stat-num" id="statYear">0</span>
+        <span class="stat-sub" id="statYearTotal">0 ครั้ง</span>
+      </div>
+      <div class="stat-card stamped">
+        <span class="stat-label">ต่อเนื่อง</span>
+        <span class="stat-num" id="statStreak">0</span>
+        <span class="stat-sub">วันติดต่อกัน</span>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <span class="group-label">คำที่ทบทวนใน 7 วันล่าสุด</span>
+      <div class="chart" id="dailyChart"></div>
+    </div>
+  </main>
+
+  <!-- ===================== VIEW: ตั้งค่า ===================== -->
+  <main class="view" id="view-settings">
+    <div class="section-header"><h1>ตั้งค่า</h1></div>
+
+    <div class="group">
+      <span class="group-label">รูปแบบตัวอักษร</span>
+      <div class="pills" id="modePills"></div>
+    </div>
+
+    <div class="group">
+      <span class="group-label">ความเร็วเสียงอ่าน</span>
+      <div class="slider-row">
+        <input type="range" id="ttsRate" min="0.5" max="1.3" step="0.05">
+        <span id="ttsRateLabel">0.85x</span>
+      </div>
+      <button class="secondary-btn" id="ttsTestBtn">🔊 ลองฟังเสียง</button>
+    </div>
+
+    <div class="group">
+      <span class="group-label">การแจ้งเตือนคำศัพท์ใหม่</span>
+      <div class="switch-row">
+        <span>เปิดการแจ้งเตือน</span>
+        <label class="switch">
+          <input type="checkbox" id="notifyToggle">
+          <span class="switch-track"></span>
+        </label>
+      </div>
+      <div class="switch-row" id="notifyTimeRow">
+        <span>เวลาแจ้งเตือนประจำวัน</span>
+        <input type="time" id="notifyTime">
+      </div>
+      <div class="pills" id="notifyFreqPills"></div>
+      <p class="fine-print" id="notifyStatus"></p>
+      <p class="fine-print">หมายเหตุ: หากปิดแอปสนิท เบราว์เซอร์บางตัว (เช่น iOS Safari) อาจไม่ส่งการแจ้งเตือนจนกว่าจะเปิดแอปอีกครั้ง เนื่องจากข้อจำกัดของระบบ ไม่ใช่ของแอปนี้</p>
+    </div>
+
+    <div class="group">
+      <span class="group-label">ข้อมูล</span>
+      <p class="fine-print" id="wordCountLabel">0 คำ ในคลังคำศัพท์</p>
+      <button class="secondary-btn danger" id="resetProgressBtn">ล้างความคืบหน้า SRS ทั้งหมด</button>
+    </div>
+
+    <div class="group install-row" id="installRow" style="display:none">
+      <p id="installDesc">เพิ่มแอปนี้ไว้ที่หน้าจอหลัก เพื่อใช้งานแบบออฟไลน์และรับการแจ้งเตือน</p>
+      <button class="install-btn" id="installBtn">เพิ่มหน้าจอหลัก</button>
+    </div>
+  </main>
+
+  <!-- ===================== Bottom tab bar ===================== -->
+  <nav class="tabbar">
+    <button class="tab-btn active" data-view="learn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+      <span>เรียน</span>
+    </button>
+    <button class="tab-btn" data-view="saved">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+      <span>บันทึก</span>
+    </button>
+    <button class="tab-btn" data-view="stats">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+      <span>สถิติ</span>
+    </button>
+    <button class="tab-btn" data-view="settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .34 1.87l.06.06a2.06 2.06 0 1 1-2.92 2.92l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.55V19.6a2.06 2.06 0 1 1-4.12 0v-.09a1.7 1.7 0 0 0-1.11-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2.06 2.06 0 1 1-2.92-2.92l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1.03H4.4a2.06 2.06 0 1 1 0-4.12h.09A1.7 1.7 0 0 0 6.04 6.9a1.7 1.7 0 0 0-.34-1.87l-.06-.06A2.06 2.06 0 1 1 8.56 2.05l.06.06a1.7 1.7 0 0 0 1.87.34h.08a1.7 1.7 0 0 0 1.03-1.55V.4a2.06 2.06 0 1 1 4.12 0v.09a1.7 1.7 0 0 0 1.03 1.55h.08a1.7 1.7 0 0 0 1.87-.34l.06-.06a2.06 2.06 0 1 1 2.92 2.92l-.06.06a1.7 1.7 0 0 0-.34 1.87v.08a1.7 1.7 0 0 0 1.55 1.03h.09a2.06 2.06 0 1 1 0 4.12h-.09a1.7 1.7 0 0 0-1.55 1.03z"/></svg>
+      <span>ตั้งค่า</span>
+    </button>
+  </nav>
+
+  <!-- ===================== Filter sheet ===================== -->
+  <div class="overlay" id="filterOverlay">
+    <div class="sheet" role="dialog" aria-label="ตัวกรองคำศัพท์">
+      <div class="sheet-grip"></div>
+      <h2>ตัวกรองคำศัพท์</h2>
+      <p class="desc">เลือกระดับความยากและหมวดหมู่ที่อยากฝึก</p>
+
+      <div class="group">
+        <span class="group-label">ระดับความยาก</span>
+        <div class="pills" id="filterLevelPills"></div>
+      </div>
+
+      <div class="group">
+        <span class="group-label">หมวดหมู่</span>
+        <div class="pills" id="filterCategoryPills"></div>
+      </div>
+
+      <button class="shuffle-btn" id="shuffleAllBtn">🎲 สุ่มคำจากทุกหมวดหมู่</button>
+      <button class="close-sheet" id="closeFilter">เสร็จสิ้น</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/db.js"></script>
+  <script src="js/srs.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/stats.js"></script>
+  <script src="js/gestures.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
